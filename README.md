@@ -1,4 +1,5 @@
 practicas-iss
 =============
 
-Practicas de IS
+Este repositorio va a guardar el código que desarrollemos en Ingeniera del Software
+
