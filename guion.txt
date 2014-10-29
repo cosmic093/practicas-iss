@@ -16,3 +16,4 @@ Ficheros del IDE, etc
 8. git commit README.md
 9. git push # Envía los cambios del repositorio local al remoto
 -------------------------------------------------------------------------
+# El git commit a veces falla probar: git commit --no-verify 
