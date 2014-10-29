@@ -1,0 +1,18 @@
+CONFIGURACIÓN BÁSICA  
+git config --global user.email "i32baher@uco.es"
+git config --global user.name "i32baher"
+git config --global core.editor gedit
+git config --global color.ui true
+.gitignore
+Ficheros del IDE, etc
+1. git clone URL
+2. cd directorio
+3. git status/commit 
+4. gedit README.md y lo hemos modificado.
+5. git status
+6. git diff
+-------------------------------------------------------------------------
+7. git add README.md #Añadimos el fichero al stage/intercambio
+8. git commit README.md
+9. git push # Envía los cambios del repositorio local al remoto
+-------------------------------------------------------------------------
