@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>TubeWorld : Tu web de videos online</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+        }
+    </style>
+  </head>
+  <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">TubeWorld</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+          <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+          <li><a href="/uploads"><span class="glyphicon glyphicon-upload"></span> Subir videos</a></li>
+          <li><a href="/usuario/perfil"><span class="glyphicon glyphicon-wrench"></span> Mi perfil</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <li><a href="/usuario/registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+          {% if user.username == "" %}
+          <li><a href="/usuario/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+          {% else %}
+          <li><a href="/usuario/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+          {%endif%}
+          </ul>
+        </div>
+      </div>
+      {% if form.errors %}
+      <p>{{ form.errors }}</p>
+      {% endif %}
+      <form method="post" action=".">{% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control"  placeholder="Buscar video.." {{ form.contenido }}
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+      </form>
+      </nav>
+
+      <br><br><br>
+      <div class="jumbotron">
+        <div class="container text-center">
+          <h1>TubeWorld</h1>
+          <p>Tu espacio web de videos Online "No esperes más y sube un video"...</p>
+        </div>
+      </div>
+
+      <div class="container-fluid bg-3 text-center">
+      <h3>Últimos videos</h3><br>
+      <div class="row">
+        {% for i in videos %}
+          <div class="col-sm-3">
+            <a href="/video/{{i.identificador}}">
+            <p><span class="glyphicon glyphicon-facetime-video"></span> {{i.titulo}}</p>
+            <video width="260" height="145" controls>
+            <source src="/media/{{i.documento}}" class="img-responsive" style="width:100%" alt="{{i.titulo}}">Your browser does not support the video tag.
+            </video></a>
+          </div>
+        {% endfor %}
+      </div>
+      </div><br>
+      <br><br>
+      <footer class="container-fluid text-center">
+        <p>Rafael Ulises Baena &#169; TubeWorld 2015</p>
+      </footer>
+  </body>
+</html>
