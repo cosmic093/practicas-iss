@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block Title %}
+  Registro.
+  {% endblock %}
+  {% block Navegacion %}
+
+  <ul class="nav navbar-nav">
+  <li><a href="/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+  <li><a href="/uploads"><span class="glyphicon glyphicon-upload"></span> Subir videos</a></li>
+  <li><a href="/usuario/perfil"><span class="glyphicon glyphicon-wrench"></span> Mi perfil</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+  <li class="active"><a href="/usuario/registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+  {% if user.username == "" %}
+  <li><a href="/usuario/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+  {% else %}
+  <li><a href="/usuario/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+  {%endif%}
+  </ul>
+
+{% endblock %}
+{% block Header %}
+			Registro.
+{% endblock %}
+
+{% block Contents %}
+
+    {% if form.errors %}
+        <p>{{ form.errors }}</p>
+    {% endif %}
+    <div class="well">
+    <form method="post" action="{% url 'signup' %}">
+
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.email.label_tag }}</td>
+                <td>{{ form.email }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.first_name.label_tag }}</td>
+                <td>{{ form.first_name }}</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.last_name.label_tag }}</td>
+                <td>{{ form.last_name }}</td>
+            </tr>
+
+        </table>
+
+        <input type="submit" value="Registrar" class="btn btn-primary active"/>
+    </form>
+  </div>
+{% endblock %}
