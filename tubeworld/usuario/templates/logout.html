@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block Title %}
+  Cerrar Sesión.
+  {% endblock %}
+  {% block Navegacion %}
+  <ul class="nav navbar-nav">
+  <li><a href="/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+  <li><a href="/uploads"><span class="glyphicon glyphicon-upload"></span> Subir videos</a></li>
+  <li><a href="/usuario/perfil"><span class="glyphicon glyphicon-wrench"></span> Mi perfil</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="/usuario/registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+    <li><a href="/usuario/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+
+  </ul>
+{% endblock %}
+{% block Header %}
+			Sesión cerrada satisfactoriamente.
+{% endblock %}
