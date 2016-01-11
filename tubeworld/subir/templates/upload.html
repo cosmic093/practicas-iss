@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block Title %}
+  Subir videos
+{% endblock %}
+
+{% block Navegacion %}
+<ul class="nav navbar-nav">
+<li><a href="/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+<li class="active"><a href="/uploads"><span class="glyphicon glyphicon-upload"></span> Subir videos</a></li>
+<li><a href="/usuario/perfil"><span class="glyphicon glyphicon-wrench"></span> Mi perfil</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li><a href="/usuario/registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+{% if user.username == "" %}
+<li><a href="/usuario/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+{% else %}
+<li><a href="/usuario/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+{%endif%}
+</ul>
+{% endblock %}
+
+{% block Header %}
+  Subir videos.
+{% endblock %}
+
+{% block Contents %}
+  <div class="well"><form action="" method="post" enctype="multipart/form-data" >{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Subir" class="btn btn-danger">
+  </form></div>
+{% endblock %}
