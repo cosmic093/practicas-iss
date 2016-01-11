@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block Title %}
+  {{video.titulo}}
+  {% endblock %}
+  {% block Navegacion %}
+  <ul class="nav navbar-nav">
+  <li><a href="/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+  <li><a href="/uploads"><span class="glyphicon glyphicon-upload"></span> Subir videos</a></li>
+  <li><a href="/usuario/perfil"><span class="glyphicon glyphicon-wrench"></span> Mi perfil</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+  <li><a href="/usuario/registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+  {% if user.username == "" %}
+  <li><a href="/usuario/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+  {% else %}
+  <li><a href="/usuario/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+  {%endif%}
+  </ul>
+{% endblock %}
+      {% block Contents %}
+  <p>
+    <video width="700" height="400" controls>
+    <source src="/media/{{video.documento}}" class="img-responsive" style="width:100%" alt="{{video.titulo}}">Your browser does not support the video tag.
+    </video>
+      <h2><span class="glyphicon glyphicon-film"></span> {{video.titulo}}</h2>
+      <p><h5><span class="glyphicon glyphicon-time"></span> Subido por {{video.usuario.username}}, {{fecha}}.</h5>
+      <h3><span class="glyphicon glyphicon-scale"></span><small> Visto {{video.visitas}} veces.</small></h3></p>
+    	<h5><span class="label label-danger">TAGS</span></h5>
+			<h5>
+			{% for i in tags %}
+      	<span class="label label-primary">{{i.contenido}}</span>
+			{% endfor %}
+			</h5>
+
+      <h3>Descripción: </h3>
+      <p>{{video.descripcion}}</p></>
+    {% endblock %}
+
+
+      {% block Interes %}
+      <h4>Quizás te interese:</h4>
+    {% for i in interes %}
+<a href="/video/{{i.identificador}}">
+      <p><span class="glyphicon glyphicon-facetime-video"></span> {{i.titulo}}</p>
+      <video width="260" height="145" controls>
+      <source src="/media/{{i.documento}}" class="img-responsive" style="width:100%" alt="{{i.titulo}}">Your browser does not support the video tag.
+      </video>
+</a>
+{% endfor %}
+    {% endblock %}
