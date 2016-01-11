@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block Title %}
+  Perfil del usuario.
+  {% endblock %}
+  {% block Navegacion %}
+
+  <ul class="nav navbar-nav">
+  <li><a href="/"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+  <li><a href="/uploads"><span class="glyphicon glyphicon-upload"></span> Subir videos</a></li>
+  <li class="active"><a href="/usuario/perfil"><span class="glyphicon glyphicon-wrench"></span> Mi perfil</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+  <li><a href="/usuario/registro"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+  {% if user.username == "" %}
+  <li><a href="/usuario/login"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+  {% else %}
+  <li><a href="/usuario/logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+  {%endif%}
+  </ul>
+{% endblock %}
+{% block Header %}
+			Perfil del usuario.
+{% endblock %}
+
+{% block Contents %}
+<div class="well">
+<table>
+    <tr>
+        <td>{{ user.username.label_tag }}</td>
+        <td><b>Usuario:</b> {{ user.username }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ user.email.label_tag }}</td>
+        <td><b>Correo electrónico:</b> {{ user.email }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ user.first_name.label_tag }}</td>
+        <td><b>Nombre:</b> {{ user.first_name }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ user.last_name.label_tag }}</td>
+        <td><b>Apellidos:</b> {{ user.last_name }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ user.date_joined.label_tag }}</td>
+        <td><b>Fecha de registro:</b> {{ user.date_joined }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ user.last_login.label_tag }}</td>
+        <td><b>Última conexión:</b> {{ user.last_login }}</td>
+    </tr>
+
+</table></div>
+<div class="container-fluid bg-3 text-center">
+  <h3>Videos subidos:</h3><br>
+  <div class="row">
+
+    {% for i in videos %}
+    <div class="col-sm-3">
+
+
+      <a href="/video/{{i.identificador}}"><span class="glyphicon glyphicon-facetime-video"></span> {{i.titulo}}
+  <video width="260" height="145" controls>
+  <source src="/media/{{i.documento}}" class="img-responsive" style="width:100%" alt="{{i.titulo}}">Your browser does not support the video tag.
+  </video></a>
+<a href="/video/eliminar/{{i.identificador}}"><button class="btn btn-danger">Eliminar </button></a>
+<a href="/video/modificar/{{i.identificador}}"><button class="btn btn-info">Modificar </button></a>
+  <button type="button" class="btn-info">{% if i.privado == 1 %}Privado{%else%}Público{%endif%}</button>
+      </div>
+{% endfor %}
+  </div>
+</div><br>
+
+
+
+{% endblock %}
